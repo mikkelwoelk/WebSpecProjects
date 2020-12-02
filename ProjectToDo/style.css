@@ -1,0 +1,167 @@
+*{
+    margin: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#todo{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 500px;
+    height: 95vh;
+    position: relative;
+    margin-top: 50px;
+}
+#todo .fa-chevron-down{
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 50px;
+}
+
+h1{
+    font-size: 40px;
+}
+
+#input{
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 10px 0;
+    width: 100%;
+}
+
+#addItem{
+    padding: 10px 10px;
+    text-transform: uppercase;
+    margin-left: 10px;
+    background-color: rgb(28, 208, 231);
+    border: none;
+    color: #ffffff;
+    outline: none;
+}
+
+#inputText{
+    outline: none;
+    width: 100%;
+    background-color: rgb(28, 208, 231);
+    padding: 10px 10px;
+    border: none;
+    color: #ffffff;
+}
+
+#inputText::placeholder{
+    color: #ffffff;
+}
+
+#todoItemList{
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0;
+    width: 100%;
+}
+
+.todoItem{
+    display: flex;
+    margin: 5px 0;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: rgb(28, 208, 231);
+}
+
+.liText{
+    margin: 0;
+    color: #ffffff;
+}
+
+.liBtns{
+    width: 65px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.liBtns i {
+    font-size: 14px;
+}
+
+.done{
+    background-color: rgb(28, 231, 113);
+}
+
+.editBtn, .deleteBtn{
+    border: none;
+    padding: 7px;
+    outline: none;
+    color: #ffffff;
+}
+
+.editBtn{
+    background-color: rgb(184, 241, 78);
+}
+
+.deleteBtn{
+    background-color: rgb(241, 83, 78);
+}
+
+#saveBtn{
+    display: none;
+    width: 100px;
+    outline: none;
+    padding: 5px;
+    color: #ffffff;
+    font-size: 15px;
+    background-color: rgb(65, 211, 65);
+    border: none;
+}
+
+#saveBtnBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+}
+
+/* 
+#listBox{
+    width: 100%;
+    height: 50vh;
+    background-color: beige;
+}
+
+.savedList{
+    width: 25%;
+    background-color: green;
+}
+*/
+#tutorial{
+    background-color: #f5f2f0;
+    width: 100%;
+}
+
+.container{
+    max-width: 1000px;
+    margin: 40px auto;
+
+}
+
+.container h1{
+    padding: 20px;
+    text-align: center;
+}
+
+
+pre{
+    border: 1px solid black;
+}

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="prism.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+</head>
+<body>
+    <main>
+        <div id="todo">
+            <h1 id="title">To do list maker</h1>
+            <div id="saveBtnBox">
+            <button id="saveBtn">Save list</button>
+            </div>
+            <div id="input">
+                <button id="addItem">add</button>
+                <input id="inputText" type="text" placeholder="Add item...">
+            </div>
+            <ul id="todoItemList">
+            </ul>
+        <i class="fas fa-chevron-down"></i>
+
+        </div>
+        <!-- List box to contain multiple lists made by user
+            <div id="listBox">
+        </div>
+        -->
+        <div id="tutorial">
+            <div class="container">
+                <h1>Lets show you how to make this to do list</h1>
+                <p>First of we write some appropriate markup:</p>
+                <pre>
+                    <code class=" language-markup">
+&lt;body&gt;
+    &lt;main&gt;
+        &lt;div id="todo"&gt; 
+            &lt;h1 id="title"&gt;To do list maker&lt;/h1&gt;
+            &lt;div id="saveBtnBox"&gt;
+                &lt;button id="saveBtn"&gt;Save list&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div id="input"&gt;
+                &lt;button id="addItem"&gt;add&lt;/button&gt;
+                &lt;input id="inputText" type="text" placeholder="Add item..."&gt;
+            &lt;/div&gt;
+            &lt;ul id="todoItemList"&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+                    </code>
+                </pre>
+            </div>
+            <div class="container">
+                <p>Next, we start off with some basic JS:</p>
+                <pre>
+                    <code class=" language-js">
+// A wise man once said "Here's an early christmas present" 
+
+// Shortkey for declaring variables through ID's
+const $ = function(id){
+    return document.getElementById(id);
+}
+
+// Now lets declare some variables:
+let todoList = $('todoItemList');
+let addBtn = $('addItem');
+let textField = $('inputText');
+let todo = $('todo');
+let saveBtn = $('saveBtn');
+                    </code>
+                </pre>
+        </div>
+
+        <div class="container">
+            <p>Now lets do the main function of creating a list by adding a task:</p>
+            <pre>
+                <code class=" language-js"> 
+// Main function to add item to the list
+function addItem () {
+    let textInput = $('inputText').value; //  Defines a value based on the users input
+
+    // CREATE LI ELEMENTS IN THE UL 
+    
+    // Creates a li element and adds attribute with a name
+    const newLi = document.createElement('li'); 
+    newLi.setAttribute('class', 'todoItem');
+
+    // Creates a div and adds attribute with a name
+    const liText = document.createElement('div'); 
+    liText.setAttribute('class', 'liText');
+    
+    // Creates a div that contains buttons, and adds attribute with a name
+    const liBtns = document.createElement('div'); // 
+    liBtns.setAttribute('class', 'liBtns');
+
+    // Inputs users text into the new li element
+    const liUserText = document.createTextNode(textInput);
+
+    // Appends (Displays) the users text in the new li element
+    liText.appendChild(liUserText);
+
+    // Appends (Displays) the new divs inside the new li element
+    newLi.append(liText, liBtns);
+
+    // Appends (Displays) the new li element to the ul
+    todoList.append(newLi);
+}
+
+    // Adds an eventlistener that calls the function addItem(), when "add" button is clicked
+    addBtn.addEventListener('click', addItem);
+                </code>
+            </pre>
+    </div>
+
+    <div class="container">
+        <p>Lets add the buttons that allows the user to edit tasks, highlight those that are done, and delete tasks if necessary</p>
+        <pre>
+            <code class=" language-js"> 
+// CREATE BUTTONS ON LI ELEMENTS
+// Creates a delete button and adds attribute with a name
+const newDeleteBtn = document.createElement('button');
+newDeleteBtn.setAttribute('class', 'deleteBtn');
+
+// Creates an edit button and adds attribute with a name
+const newEditBtn = document.createElement('button');
+newEditBtn.setAttribute('class', 'editBtn');
+    
+// Appends (displays) the delete and edit buttons on every li element added
+liBtns.append(newEditBtn, newDeleteBtn);
+newDeleteBtn.innerHTML = '&lt;i class="fas fa-trash-alt">&lt;/i>'; // Icon from font-awesome
+newEditBtn.innerHTML = '&lt;i class="fas fa-pencil-alt">&lt;/i>'; // Icon from font-awesome
+
+// HIGHLIGHT A FINNISHED LI TASK IN THE UL 
+// Loop through each li element and add an event listener with a function corresponding to the feature needed
+let todoListItms = $('todoItemList').childNodes;
+todoListItms.forEach(function() {
+    newDeleteBtn.addEventListener('click', deleteItem);
+    newLi.addEventListener('click', crossItem);
+    newEditBtn.addEventListener('click', editItem);
+});
+
+// Function to delete an li element in the ul
+function deleteItem () {
+    newLi.remove();
+}
+
+// Function that adds a class to highlight an li element from the ul when clicked  
+function crossItem () {
+    if (newLi.classList.contains('done')){
+        newLi.classList.remove('done');
+    } else {
+        newLi.classList.add('done');
+    }
+}
+
+// Prompts a message to edit an item in case of a mispell
+// Displays a prompt with an input field to edit the input text of the li element
+function editItem () {
+    let txt;
+    let newText = prompt('Edit item', liText.innerHTML);
+    if (newText == null || newText == ' '){ 
+        txt = textInput; // If input field is left empty, no edits will be made
+    } else { 
+        txt = newText; // New text will replace the old text 
+    }
+    liText.innerHTML = txt; 
+}
+
+            </code>
+        </pre>
+</div>
+
+<div class="container">
+    <p>To make sure the user inputs text, let's make an alert in case they click the "add" button without any text</p>
+    <pre>
+        <code class=" language-js"> 
+// check if input value is > 0, if yes = run addItem function
+function addItemAfterClick(){
+    if (textField.value.length > 0) {
+        addItem();
+    } else {
+        alert('You forgot to put in some text');
+    }
+}
+        </code>
+    </pre>
+</div>
+
+<div class="container">
+    <p>When adding the function above, we need to edit the call that happens when clicking the "add" button, to this new call that includes the addItemAfterClick</p>
+    <pre>
+        <code class=" language-js"> 
+// In the first part of the function addItem(), we added an eventlistener that called for addItem on click
+addBtn.addEventListener('click', addItem);
+// Now we need to change that call in to the new function, that adds the alert if the user doesn't input text
+addBtn.addEventListener('click', addItemAfterClick);
+        </code>
+    </pre>
+</div>
+
+<div class="container">
+    <p>Quality of life, that must be added within the addItem function to work properly</p>
+    <pre>
+        <code class=" language-js"> 
+// Putting the focus back on the input field after adding an li element
+textField.focus();
+
+// Resets the input field after adding an li element, so that it displays the placeholder text
+textField.value = ' ';
+} 
+
+// Add the possibility of being able to press 'Enter button' to add li element to the ul
+function addItemAfterKeypress(e){
+    if (textField.value.length > 0 && e.key === 'Enter') {
+      addItem();
+    } else if (textField.value.length == 0 && e.key === 'Enter'){
+        alert('You forgot to put in some text');
+    }
+}
+
+// To add the "Enter" button functionality, we need to add an eventlistener to the inputfield that calls for the addItemAfterKeypress()
+textField.addEventListener('keypress', addItemAfterKeypress);
+
+        </code>
+    </pre>
+</div>
+
+    </main>
+    <!--<script src="./javascript/javascript.js"></script>-->
+    <script src="./javascript/prism.js"></script>
+    <script src="./opti.js"></script>
+</body>
+</html>
