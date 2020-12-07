@@ -117,13 +117,13 @@ const editItem = function (e) {
     let ttt = tt.parentElement;
     let tttt = ttt.parentElement;
     
-    let newText = prompt('Edit item', tttt.firstChild.innerHTML);   // Prompts a message to edit the item, which should include what was already written in the liText div
+    let newText = prompt('Edit item', tttt.firstChild(ttt).innerHTML);   // Prompts a message to edit the item, which should include what was already written in the liText div
     if (newText == null || newText == ''){                          // Checks if there's nothing written in the textfield
         txt = textField.value;                                      // If there is: Change nothing
     } else {
         txt = newText;                                              // If not: Change to the new input text
     }
-    tttt.firstChild.innerHTML = txt;
+    tttt.firstChild(ttt).innerHTML = txt;
 }
 
 // Resets and focuses input
